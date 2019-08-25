@@ -3,6 +3,7 @@
 */
 
 import React from 'react';
+import cardsFromJSON from '../cards.json'
 
 class TopCardFront extends React.Component {
     constructor(props) {
@@ -14,8 +15,7 @@ class TopCardFront extends React.Component {
         return (
             <div className="topCardFront">
                 <h1>Question:</h1>
-                <p>Question text goes here</p>
-                <button>Flip Card</button> 
+                <p>{this.props.card.questionText}</p>
             </div>
         )
     }
@@ -31,8 +31,7 @@ class TopCardBack extends React.Component {
         return (
             <div className="topCardBack">
                 <h1>Answer:</h1>
-                <p>Answer text goes here</p>
-                <button>Flip Card</button> 
+                <pre>{this.props.card.answerText}</pre>
             </div>
         )
     }
@@ -48,8 +47,8 @@ class TopCard extends React.Component {
         return (
             <div className = "topCard">
                 <div className = "topCardInner">
-                    <TopCardFront />
-                    <TopCardBack />
+                    <TopCardFront card = {this.props.card}/>
+                    <TopCardBack card = {this.props.card}/>
                 </div>
             </div> 
         )
@@ -60,13 +59,15 @@ class Cards extends React.Component {
     constructor(props) {
       super(props);
     }
-  
+
     render() {
+        let currentCard = cardsFromJSON[0]
+
       return (
         <div className = "cards">
             <div className = "lastCard" />
             <div className = "middleCard" />
-            <TopCard/>
+            <TopCard card = {currentCard} />
         </div>
       )
     }

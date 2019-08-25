@@ -10,19 +10,30 @@ import RightArrow from './components/RightArrow.js'
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {index: 0, currentCategory: 'all', categoryMenuSelected: true}
+  }
+
+  handleSelectCategoryClick = () => {
+    this.setState({categorySelected: true})
   }
 
   render() {
+    {/*
+    let SelectCategoryMenu
+    if(this.state.categoryMenuSelected) {
+      SelectCategoryMenu = <SelectCategoryMenu />
+    }
+  */}
     return (
       <div className = "page">
-        <TopBar/>
-        
-        <NewCardMenu/>
-        <SelectCategoryMenu/>
-        
+        <TopBar handleSelectCategoryClick = {this.handleSelectCategoryClick}/>
+        {
+        /*<NewCardMenu/>*/
+        }
+        <SelectCategoryMenu />
         <LeftArrow/>
         <RightArrow/>
-        <Cards/>
+        <Cards index = {this.state.index} />
       </div>
     )
   }

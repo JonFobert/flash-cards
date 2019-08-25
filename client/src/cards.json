@@ -1,0 +1,7 @@
+[
+{
+   "category": "Array",
+   "questionText": "Give an example of the array method bind()",
+   "answerText": "var sum = function(a,b) {\n   return a+b;\n};\n\nvar addFive = sum.bind(null,5);\nconsole.log(addFive(10));\n//15"
+}
+]
