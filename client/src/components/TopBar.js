@@ -1,6 +1,6 @@
 import React from 'react';
 
-class NewCardMenu extends React.Component {
+class NewCard extends React.Component {
     constructor(props) {
         super(props)
         this.state = {isNewCardMenuOpen: false}
@@ -16,7 +16,7 @@ class NewCardMenu extends React.Component {
 
     render() {
         return(
-            <h3 className = "newCardMenu" onClick = {this.handleClick}>New Card</h3>
+            <h3 className = "newCard" onClick = {this.handleClick}>New Card</h3>
         )
     }
 }
@@ -63,11 +63,10 @@ class TopBar extends React.Component {
         <nav className="topBar">
             <GitHubLink/>
             <div className= "menuActions">
-                <NewCardMenu/>
+                <NewCard/>
                 <SelectCategory />
             </div>
         </nav>
-        
     )
   }
 }

@@ -79,7 +79,7 @@ Begin user CSS
 	display: grid;
 	height: 100vh;
 	grid-template-rows: 50px 1fr;
-	grid-template-columns: 100px 1fr 100px;
+	grid-template-columns: 10% 1fr 10%;
 }
 
 .githubLink {
@@ -102,7 +102,7 @@ Begin user CSS
 	align-items: center;
 }
 
-.newCardMenu, .selectCategory{
+.newCard, .selectCategory{
 	margin-right: 20px;
 	color: white;
 	cursor: pointer;

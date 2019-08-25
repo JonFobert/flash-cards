@@ -15,6 +15,7 @@ class TopCardFront extends React.Component {
             <div className="topCardFront">
                 <h1>Question:</h1>
                 <p>Question text goes here</p>
+                <button>Flip Card</button> 
             </div>
         )
     }
@@ -31,6 +32,7 @@ class TopCardBack extends React.Component {
             <div className="topCardBack">
                 <h1>Answer:</h1>
                 <p>Answer text goes here</p>
+                <button>Flip Card</button> 
             </div>
         )
     }
