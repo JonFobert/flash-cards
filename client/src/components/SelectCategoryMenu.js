@@ -7,9 +7,11 @@ class SelectCategoryMenu extends React.Component {
     render() {
         return(
             <div>
-                
+
             </div>
         )
     }
 
 }
+
+export default SelectCategoryMenu

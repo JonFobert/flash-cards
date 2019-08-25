@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import TopBar from './components/TopBar.js'
 import NewCardMenu from './components/NewCardMenu.js'
+import SelectCategoryMenu from './components/SelectCategoryMenu.js'
 import Cards from './components/Cards.js'
 import LeftArrow from './components/LeftArrow.js'
 import RightArrow from './components/RightArrow.js'
@@ -17,7 +18,7 @@ class App extends React.Component {
         <TopBar/>
         
         <NewCardMenu/>
-        <SelectCategory/>
+        <SelectCategoryMenu/>
         
         <LeftArrow/>
         <RightArrow/>
