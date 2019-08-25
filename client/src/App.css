@@ -112,18 +112,37 @@ Begin user CSS
 	Menu Formatting
 *************************/
 
+.newCardMenu {
+	grid-row: 2 / 3;
+	grid-column: 2 / span 2;
+	margin-right: 50px;
+	margin-top: 10px;
+	background: white;
+	box-shadow: 0px 0px 5px 0px #8A9986;
+	width: 350px;
+	height: 400px;
+	justify-self: right;
+	line-height: 1.5;
+	z-index: 2;
+}
+
+.newCardMenu > h2 {
+	text-align: center
+}
+
+
 .categoryMenu {
 	grid-row: 2 / 3;
 	grid-column: 2 / span 2;
-
 	margin-right: 10px;
-	margin-top: 20px;
+	margin-top: 10px;
 	background: white;
 	box-shadow: 0px 0px 5px 0px #8A9986;
 	width: 300px;
 	height: 200px;
 	justify-self: right;
 	line-height: 1.5;
+	z-index: 1;
 }
 
 .categoryMenu > h2 {
@@ -131,6 +150,7 @@ Begin user CSS
 }
 
 .leftArrow, .rightArrow {
+	grid-row: 2 / 3;
 	align-self: stretch;
 	display: flex;
 	align-items: center;
@@ -143,6 +163,7 @@ Begin user CSS
 
 .rightArrow {
 	grid-column: 3 / 4;
+	
 }
 
 .leftArrow:hover, .rightArrow:hover {

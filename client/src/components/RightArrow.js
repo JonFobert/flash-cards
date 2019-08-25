@@ -1,18 +1,21 @@
 import React from 'react'
 
 class RightArrow extends React.Component {
-    constructor(props) {
-      super(props);
-    }
+  constructor(props) {
+    super(props);
+  }
   
-    render() {
-      return (
-          <div className = "rightArrow">
-              <p>Next</p>
-          </div>
-          
-      )
-    }
-}
+  handleClick = () => {
+    this.props.handleClick()
+  }
+
+  render() {
+    return (
+      <div className = "rightArrow" onClick={this.handleClick}>
+        <p>Next</p>
+      </div>
+    );
+  };
+};
 
 export default RightArrow

@@ -1,6 +1,6 @@
 import React from 'react'
 
-class SelectCategoryMenu extends React.Component {
+class CategoryMenu extends React.Component {
     constructor(props) {
         super(props)
     }
@@ -26,4 +26,4 @@ class SelectCategoryMenu extends React.Component {
     }
 }
 
-export default SelectCategoryMenu
+export default CategoryMenu

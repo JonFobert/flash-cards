@@ -3,5 +3,11 @@
    "category": "Array",
    "questionText": "Give an example of the array method bind()",
    "answerText": "var sum = function(a,b) {\n   return a+b;\n};\n\nvar addFive = sum.bind(null,5);\nconsole.log(addFive(10));\n//15"
-}
+},
+{
+    "category": "Array",
+    "questionText": "Give an example of the array method apply()",
+    "answerText": "var array = ['a', 'b']\nvar elements = [0,1,2]\narray.push.apply(array, elements);\nconsole.log(array)"
+ }
+
 ]

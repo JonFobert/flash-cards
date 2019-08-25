@@ -9,9 +9,7 @@ class NewCard extends React.Component {
     }
 
     handleClick() {
-        this.setState(state => ({
-            isNewCardMenuOpen: !state.isNewCardMenuOpen
-        }))
+        this.props.handleClick()
     }
 
     render() {
@@ -61,8 +59,8 @@ class TopBar extends React.Component {
         <nav className="topBar">
             <GitHubLink/>
             <div className= "menuActions">
-                <NewCard/>
-                <SelectCategory handleClick = {this.props.handleSelectCategoryClick}/>
+                <NewCard handleClick = {this.props.handleNewCardMenuClick}/>
+                <SelectCategory handleClick = {this.props.handleCategoryMenuClick}/>
             </div>
         </nav>
     )

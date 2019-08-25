@@ -61,7 +61,7 @@ class Cards extends React.Component {
     }
 
     render() {
-        let currentCard = cardsFromJSON[0]
+        let currentCard = cardsFromJSON[this.props.index]
 
       return (
         <div className = "cards">

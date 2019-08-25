@@ -5,9 +5,13 @@ class LeftArrow extends React.Component {
       super(props);
     }
   
+    handleClick = () => {
+      this.props.handleClick()
+    }
+
     render() {
       return (
-          <div className = 'leftArrow'>
+          <div className = 'leftArrow' onClick={this.handleClick}>
               <p>Back</p>
           </div>
       )
