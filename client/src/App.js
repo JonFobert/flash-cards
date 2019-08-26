@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import cardsFromJSON from './cards.json'
 import TopBar from './components/TopBar.js'
 import NewCardMenu from './components/NewCardMenu.js'
 import CategoryMenu from './components/CategoryMenu.js'
@@ -10,8 +11,14 @@ import RightArrow from './components/RightArrow.js'
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {index: 0, currentCategory: 'all', categoryMenuOpen: false, newCardMenuOpen: false}
+    this.state = {
+      index: 0,
+      categories: ['arrayMethods', 'stringMethods', 'react', 'es6'],
+      categoryMenuOpen: false,
+      newCardMenuOpen: false,
+    }
   }
+
 
   handleCategoryMenuClick = () => {
     this.setState({categoryMenuOpen: !this.state.categoryMenuOpen})
@@ -19,6 +26,19 @@ class App extends React.Component {
 
   handleNewCardMenuClick = () => {
     this.setState({newCardMenuOpen: !this.state.newCardMenuOpen})
+  }
+
+  handleCategoryChange = (e) => {
+    const categoryIndex = this.state.categories.indexOf(e.target.value)
+    const stateCategories = this.state.categories
+    if(categoryIndex !== -1) {
+      stateCategories.splice(categoryIndex, 1)
+      this.setState({categories: stateCategories})
+    } else {
+      stateCategories.push(e.target.value)
+      this.setState({categories: stateCategories})
+    }
+
   }
 
   handleRightClick = () => {
@@ -30,9 +50,23 @@ class App extends React.Component {
   }
 
   render() {
+    let cards = [];
+    console.log(cardsFromJSON)
+    console.log(this.state.categories)
+    for(let i = 0; i < cardsFromJSON.length; i++) {
+      for(let j = 0; j < this.state.categories.length; j++) {
+        console.log(`cardFromJSON category: ${cardsFromJSON[i].category}`)
+        console.log(`state category: ${this.state.categories[j]}`)
+        if(cardsFromJSON[i].category == this.state.categories[j]) {
+          cards.push(cardsFromJSON[i])
+        }
+      }
+    }
+    console.log(cards)
+
     let CategoryMenuCreate;
     if(this.state.categoryMenuOpen) {
-      CategoryMenuCreate = <CategoryMenu />;
+      CategoryMenuCreate = <CategoryMenu categories = {this.state.categories} handleCategoryChange = {this.handleCategoryChange}/>;
     }
 
     let newCardMenu;
@@ -46,7 +80,7 @@ class App extends React.Component {
         {newCardMenu}
         <LeftArrow handleClick = {this.handleLeftClick}/>
         <RightArrow handleClick = {this.handleRightClick}/>
-        <Cards index = {this.state.index} />
+        <Cards cards = {cards} index = {this.state.index} />
       </div>
     )
   }

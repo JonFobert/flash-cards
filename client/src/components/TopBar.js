@@ -14,7 +14,7 @@ class NewCard extends React.Component {
 
     render() {
         return(
-            <h3 className = "newCard" onClick = {this.handleClick}>New Card</h3>
+            <h3 className = "newCard" onClick = {this.handleClick}>Add Card</h3>
         )
     }
 }
@@ -33,7 +33,7 @@ class SelectCategory extends React.Component {
 
     render() {
         return(
-            <h3 className = "selectCategory" onClick = {this.handleClick}>Select Category</h3>
+            <h3 className = "selectCategory" onClick = {this.handleClick}>Select Categories</h3>
         )
     }
 }
