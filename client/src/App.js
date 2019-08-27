@@ -32,8 +32,13 @@ class App extends React.Component {
     const categoryIndex = this.state.categories.indexOf(e.target.value)
     const stateCategories = this.state.categories
     if(categoryIndex !== -1) {
-      stateCategories.splice(categoryIndex, 1)
-      this.setState({categories: stateCategories})
+      if(stateCategories.length !== 1) {
+
+        stateCategories.splice(categoryIndex, 1)
+        this.setState({categories: stateCategories, index: 0})
+      } else {
+        alert("Must have at least one category")
+      }
     } else {
       stateCategories.push(e.target.value)
       this.setState({categories: stateCategories})
@@ -42,11 +47,14 @@ class App extends React.Component {
   }
 
   handleRightClick = () => {
+    if(this.state.index < cardsFromJSON.length-1)
     this.setState({index: this.state.index + 1})
   }
-
+  
   handleLeftClick = () => {
-    this.setState({index: this.state.index - 1})
+    if(this.state.index > 0) {
+      this.setState({index: this.state.index - 1})
+    }
   }
 
   render() {
