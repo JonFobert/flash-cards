@@ -8,8 +8,10 @@ const Card = require('../../models/Card');
 // @desc get specified cards
 // @access Public
 router.get('/', (req, res) => {
-    Card.find()
+    console.log(req.query.categories)
+    Card.find({category: {$in: req.query.categories}})
         .then(cards => res.json(cards))
+        .catch(err => console.log(err))
 });
 
 // @route POST api/cards
@@ -18,8 +20,8 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     const newCard = new Card({
         category: req.body.category,
-        questionText: 'my question',
-        answerText: 'my answer'
+        questionText: req.body.questionText,
+        answerText: req.body.answerText
     })
     newCard.save().then(card => res.json(card))
 })

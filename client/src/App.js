@@ -1,3 +1,5 @@
+//TO DO: create Fetch GET request to update the categories with categories change from Select Categories menu
+
 import React from 'react';
 import './App.css';
 import cardsFromJSON from './cards.json'
@@ -12,13 +14,27 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      doneLoading: false,
       index: 0,
+      cards: [],
       categories: ['arrayMethods', 'stringMethods', 'react', 'es6'],
       categoryMenuOpen: false,
       newCardMenuOpen: false,
     }
   }
 
+  componentDidMount() {
+    let categoriesQuery= '';
+    categoriesQuery = categoriesQuery.concat('[]=', this.state.categories[0])
+    for (let i = 1; i < this.state.categories.length; i++) {
+      console.log(i)
+      categoriesQuery = categoriesQuery.concat('&categories[]=', this.state.categories[i])
+    };
+    console.log(categoriesQuery)
+    fetch(`/api/cards?categories${categoriesQuery}`)
+      .then(res => res.json())
+      .then (cards => this.setState({cards: cards, doneLoading: true}))
+  }  
 
   handleCategoryMenuClick = () => {
     this.setState({categoryMenuOpen: !this.state.categoryMenuOpen})
@@ -33,7 +49,6 @@ class App extends React.Component {
     const stateCategories = this.state.categories
     if(categoryIndex !== -1) {
       if(stateCategories.length !== 1) {
-
         stateCategories.splice(categoryIndex, 1)
         this.setState({categories: stateCategories, index: 0})
       } else {
@@ -47,7 +62,7 @@ class App extends React.Component {
   }
 
   handleRightClick = () => {
-    if(this.state.index < cardsFromJSON.length-1)
+    if(this.state.index < this.state.cards.length-1)
     this.setState({index: this.state.index + 1})
   }
   
@@ -57,40 +72,49 @@ class App extends React.Component {
     }
   }
 
-  render() {
-    let cards = [];
-    console.log(cardsFromJSON)
-    console.log(this.state.categories)
-    for(let i = 0; i < cardsFromJSON.length; i++) {
-      for(let j = 0; j < this.state.categories.length; j++) {
-        console.log(`cardFromJSON category: ${cardsFromJSON[i].category}`)
-        console.log(`state category: ${this.state.categories[j]}`)
-        if(cardsFromJSON[i].category == this.state.categories[j]) {
-          cards.push(cardsFromJSON[i])
+  calculateDisplayedCards = () => {
+    let cardsDisplayed = [];
+      //console.log(this.state.cards)
+      //console.log(this.state.categories)
+      for(let i = 0; i < this.state.cards.length; i++) {
+        for(let j = 0; j < this.state.categories.length; j++) {
+          //console.log(`state card category: ${this.state.cards[i].category}`)
+          //console.log(`state category: ${this.state.categories[j]}`)
+          if(this.state.cards[i].category == this.state.categories[j]) {
+            cardsDisplayed.push(this.state.cards[i])
+          }
         }
       }
-    }
-    console.log(cards)
+    return cardsDisplayed
+  }
 
-    let CategoryMenuCreate;
-    if(this.state.categoryMenuOpen) {
-      CategoryMenuCreate = <CategoryMenu categories = {this.state.categories} handleCategoryChange = {this.handleCategoryChange}/>;
-    }
+  render() {
+    if(!this.state.doneLoading) {
+      return (<p>loading...</p>)
+    } else {
+      console.log(this.calculateDisplayedCards())
+      let CategoryMenuCreate;
+      if(this.state.categoryMenuOpen) {
+        CategoryMenuCreate = <CategoryMenu categories = {this.state.categories} handleCategoryChange = {this.handleCategoryChange}/>;
+      }
 
-    let newCardMenu;
-    if(this.state.newCardMenuOpen) {
-      newCardMenu = <NewCardMenu />
-    }    
-    return (
-      <div className = "page">
-        <TopBar handleNewCardMenuClick = {this.handleNewCardMenuClick} handleCategoryMenuClick = {this.handleCategoryMenuClick}/>
-        {CategoryMenuCreate}
-        {newCardMenu}
-        <LeftArrow handleClick = {this.handleLeftClick}/>
-        <RightArrow handleClick = {this.handleRightClick}/>
-        <Cards cards = {cards} index = {this.state.index} />
-      </div>
-    )
+      let newCardMenu;
+      if(this.state.newCardMenuOpen) {
+        newCardMenu = <NewCardMenu />
+      }  
+
+      return (
+        <div className = "page">
+          <p>loading...</p>
+          <TopBar handleNewCardMenuClick = {this.handleNewCardMenuClick} handleCategoryMenuClick = {this.handleCategoryMenuClick}/>
+          {CategoryMenuCreate}
+          {newCardMenu}
+          <LeftArrow handleClick = {this.handleLeftClick}/>
+          <RightArrow handleClick = {this.handleRightClick}/>
+          <Cards cards = {this.calculateDisplayedCards()} index = {this.state.index} />
+        </div>
+      )
+    }
   }
 }
 
