@@ -1,4 +1,6 @@
-//TO DO: create Fetch GET request to update the categories with categories change from Select Categories menu
+//TO DO: Start with Joana Yellow and select categories Window. Then blur when a category is selected
+//Consider CSS blur() and transition
+//transition slide from left to right && right to left?
 
 import React from 'react';
 import './App.css';
@@ -124,7 +126,6 @@ class App extends React.Component {
 
       return (
         <div className = "page">
-          <p>loading...</p>
           <TopBar handleNewCardMenuClick = {this.handleNewCardMenuClick} handleCategoryMenuClick = {this.handleCategoryMenuClick}/>
           {CategoryMenuCreate}
           {newCardMenu}
