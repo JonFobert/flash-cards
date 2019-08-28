@@ -24,10 +24,10 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchBasedOnCategories()
+    this.fetchGetBasedOnCategories()
   }  
 
-  fetchBasedOnCategories = () => {
+  fetchGetBasedOnCategories = () => {
     let categoriesQuery= '';
     categoriesQuery = categoriesQuery.concat('[]=', this.state.categories[0])
     for (let i = 1; i < this.state.categories.length; i++) {
@@ -53,16 +53,31 @@ class App extends React.Component {
       if(stateCategories.length !== 1) {
         stateCategories.splice(categoryIndex, 1)
         this.setState({categories: stateCategories, index: 0})
-        this.fetchBasedOnCategories()
+        this.fetchGetBasedOnCategories()
       } else {
         alert("Must have at least one category")
       }
     } else {
       stateCategories.push(e.target.value)
       this.setState({categories: stateCategories})
-      this.fetchBasedOnCategories()
+      this.fetchGetBasedOnCategories()
     }
+  }
 
+  handleNewCard = (e, formState) => {
+    e.preventDefault()
+    console.log(formState.category)
+    console.log(formState.questionText)
+    console.log(formState.answerText)
+    fetch('/api/cards', {
+      method: "post",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application.json',
+      },
+      body: JSON.stringify({categories: this.state.categories, newCategory: formState.newCategory, questionText: formState.questionText, answerText: formState.answerText})
+    })
+    this.fetchGetBasedOnCategories()
   }
 
   handleRightClick = () => {
@@ -104,7 +119,7 @@ class App extends React.Component {
 
       let newCardMenu;
       if(this.state.newCardMenuOpen) {
-        newCardMenu = <NewCardMenu />
+        newCardMenu = <NewCardMenu handleNewCard = {this.handleNewCard} />
       }  
 
       return (

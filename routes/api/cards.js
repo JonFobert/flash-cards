@@ -19,11 +19,13 @@ router.get('/', (req, res) => {
 // @access Public
 router.post('/', (req, res) => {
     const newCard = new Card({
-        category: req.body.category,
+        category: req.body.newCategory,
         questionText: req.body.questionText,
         answerText: req.body.answerText
     })
-    newCard.save().then(card => res.json(card))
+    newCard.save()
+        .then(cards => res.json(cards))
+        .catch(err => console.log(err))
 })
 
 // @route Delete api/cards
