@@ -24,17 +24,19 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    this.fetchBasedOnCategories()
+  }  
+
+  fetchBasedOnCategories = () => {
     let categoriesQuery= '';
     categoriesQuery = categoriesQuery.concat('[]=', this.state.categories[0])
     for (let i = 1; i < this.state.categories.length; i++) {
-      console.log(i)
       categoriesQuery = categoriesQuery.concat('&categories[]=', this.state.categories[i])
     };
-    console.log(categoriesQuery)
     fetch(`/api/cards?categories${categoriesQuery}`)
       .then(res => res.json())
       .then (cards => this.setState({cards: cards, doneLoading: true}))
-  }  
+  }
 
   handleCategoryMenuClick = () => {
     this.setState({categoryMenuOpen: !this.state.categoryMenuOpen})
@@ -51,12 +53,14 @@ class App extends React.Component {
       if(stateCategories.length !== 1) {
         stateCategories.splice(categoryIndex, 1)
         this.setState({categories: stateCategories, index: 0})
+        this.fetchBasedOnCategories()
       } else {
         alert("Must have at least one category")
       }
     } else {
       stateCategories.push(e.target.value)
       this.setState({categories: stateCategories})
+      this.fetchBasedOnCategories()
     }
 
   }
