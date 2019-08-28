@@ -27,7 +27,7 @@ class NewCardMenu extends React.Component {
     render() {
         return (
             <div className="newCardMenu">
-                <h2>New Card:</h2>
+                <h2>New Card</h2>
                 <form onSubmit={this.handleFormSubmit}>
                     <select id='category' required onChange={this.handleCategoryChange}>
                         <option value="">Select a Category</option>
@@ -38,6 +38,7 @@ class NewCardMenu extends React.Component {
                     </select>
                     <br />
                     <label htmlFor="questionText" >Enter Question Text:</label>
+                    <br />
                     <textarea required id="questionText" name="questionText" rows="5" cols="33" onChange = {this.handleQuestionChange}>
                     </textarea>
                     <br />
