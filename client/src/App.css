@@ -278,7 +278,7 @@ body, input, button, select, option, textarea {
 	transform-style: preserve-3d;
   }
   
-  .topCard:hover .topCardInner {
+  .flipped .topCardInner {
 	transform: rotateY(180deg);
   }
   

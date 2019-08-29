@@ -11,6 +11,7 @@ import CategoryMenu from './components/CategoryMenu.js'
 import Cards from './components/Cards.js'
 import LeftArrow from './components/LeftArrow.js'
 import RightArrow from './components/RightArrow.js'
+import { CSSTransition } from "react-transition-group";
 
 class App extends React.Component {
   constructor(props) {
@@ -23,6 +24,7 @@ class App extends React.Component {
       categories: ['arrayMethods', 'stringMethods', 'react', 'es6'],
       categoryMenuOpen: false,
       newCardMenuOpen: false,
+      cardFlipped: false
     }
   }
 
@@ -31,7 +33,6 @@ class App extends React.Component {
   }  
 
   handleInitialCategories = (e) => {
-    console.log('handling initial Cats')
     this.setState({initialCategoriesSelected: true})
   }
 
@@ -74,9 +75,6 @@ class App extends React.Component {
 
   handleNewCard = (e, formState) => {
     e.preventDefault()
-    console.log(formState.category)
-    console.log(formState.questionText)
-    console.log(formState.answerText)
     fetch('/api/cards', {
       method: "post",
       headers: {
@@ -90,7 +88,7 @@ class App extends React.Component {
 
   handleRightClick = () => {
     if(this.state.index < this.state.cards.length-1)
-    this.setState({index: this.state.index + 1})
+    this.setState({index: this.state.index + 1, cardFlipped: false})
   }
   
   handleLeftClick = () => {
@@ -99,14 +97,17 @@ class App extends React.Component {
     }
   }
 
+  /*******handle flipping cards******** */
+  handleCardFlip = () => {
+    this.setState({cardFlipped: !this.state.cardFlipped})
+  }
+
+
+
   calculateDisplayedCards = () => {
     let cardsDisplayed = [];
-      //console.log(this.state.cards)
-      //console.log(this.state.categories)
       for(let i = 0; i < this.state.cards.length; i++) {
         for(let j = 0; j < this.state.categories.length; j++) {
-          //console.log(`state card category: ${this.state.cards[i].category}`)
-          //console.log(`state category: ${this.state.categories[j]}`)
           if(this.state.cards[i].category == this.state.categories[j]) {
             cardsDisplayed.push(this.state.cards[i])
           }
@@ -150,7 +151,7 @@ class App extends React.Component {
           {newCardMenu}
           <LeftArrow handleClick = {this.handleLeftClick}/>
           <RightArrow handleClick = {this.handleRightClick}/>
-          <Cards cards = {this.calculateDisplayedCards()} index = {this.state.index} />
+          <Cards cards = {this.calculateDisplayedCards()} index = {this.state.index} cardFlipped = {this.state.cardFlipped} handleCardFlip = {this.handleCardFlip}/>
         </div>
       )
     }
