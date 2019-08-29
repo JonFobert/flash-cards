@@ -48,26 +48,32 @@ table {
 }
 
 
+
+input[type="submit"] {
+  -webkit-appearance: none;
+}
+
+
 /* Link Color Reset */
 
 a:link {
 	text-decoration: none;
-	color: white;
+	color: #e0e0e0;
   }
   
   a:visited {
 	text-decoration: none;
-	color: white;
+	color: #e0e0e0;
   }
   
   a:hover {
 	text-decoration: none;
-	color: white;
+	color: #e0e0e0
   }
   
   a:active {
 	text-decoration: none;
-	color: white;
+	color: #e0e0e0;
   }
 
 
@@ -76,12 +82,29 @@ Begin user CSS
 ******************************/
 
 html {
+	font-family: 'Roboto', sans-serif;
+	overflow: hidden
+}
+
+body, input, button, select, option, textarea {
+	font-family: 'Roboto', sans-serif;
+}
+
+.backgroundImage {
 	background: url(/assets/joannaYellow.jpg) no-repeat center center fixed;
 	-webkit-background-size: cover;
   	-moz-background-size: cover;
   	-o-background-size: cover;
 	background-size: cover;
-	font-family: 'Roboto', sans-serif;
+	grid-row: 1 / 3;
+	grid-column: 1 / 4;
+	z-index: -1;
+	transform: scale(1.03);
+	filter: brightness(0.7)
+}
+
+.blur {
+	filter: brightness(0.7)
 }
 
 .page {
@@ -92,18 +115,20 @@ html {
 }
 
 .githubLink {
+	margin-left: 20px;
     display: flex;
     align-items: center;
-    color: white;
+    color: black
 }
+
 
 .topBar {
     display: flex;
-    background: black;
 	grid-row: 1 / 2;
 	grid-column: 1 / 4;
     justify-content: space-between;
-    align-items: center;
+	align-items: center;
+	font-size: 24px;
 }
 
 .menuActions {
@@ -113,7 +138,7 @@ html {
 
 .newCard, .selectCategory{
 	margin-right: 20px;
-	color: white;
+	color: #e0e0e0;
 	cursor: pointer;
 }
 
@@ -121,8 +146,29 @@ html {
 	Menu Formatting
 *************************/
 
+.buttonHolder {
+	text-align: center;
+}
+
+#initialSubmit {
+	margin: 50px 50px 0 50px;
+    font-size: 34px;
+    background: transparent;
+    color: #ffffff;
+    font-weight: 600;
+    border-width: 3px;
+    border-radius: 8px;
+    border-color: #ffffff;
+    padding: 5px 10px 5px 10px;
+}
+
+#initialSubmit:hover {
+	color: #333333;
+	background-color: #ffffff
+}
+
 .newCardMenu {
-	color: white;
+	color: #e0e0e0;
 	text-align: center;
 	font-size: 16px;
     background-color: rgb(33, 33, 33);
@@ -136,7 +182,7 @@ html {
 	justify-self: center;
 	align-self: center;
 	line-height: 2;
-	z-index: 4;
+	z-index: 3;
 	padding-left: 20px
 }
 
@@ -146,8 +192,8 @@ html {
 }
 
 
-.categoryMenu {
-	color: white;
+.categoryMenu, .categoryMenuInitial {
+	color: #e0e0e0;
 	font-size: 20px;
     background-color: rgb(33, 33, 33);
 	grid-row: 2 / 3;
@@ -160,11 +206,11 @@ html {
 	justify-self: center;
 	align-self: center;
 	line-height: 2;
-	z-index: 4;
+	z-index: 3;
 	padding-left: 20px
 }
 
-.categoryMenu > h2 {
+.categoryMenu > h2, .categoryMenuInitial > h2 {
 	text-align: center;
 	font-size: 32px;
 }
@@ -175,6 +221,9 @@ html {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	font-size: 140px;
+	color: #e0e0e0;
+	cursor: pointer;
 }
 
 .leftArrow {
@@ -187,8 +236,20 @@ html {
 }
 
 .leftArrow:hover, .rightArrow:hover {
-	background-color: #8A9986
+	z-index: 4;
+	position: relative;
+	animation-name: example;
+  	animation-duration: 1s;
+	animation-iteration-count: infinite;
+	animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
+
+@keyframes example {
+	0%   { left:0px;}
+	50%  { left:15px;}
+	100% { left:0px;}
+}
+
 
 .cards {
 	grid-column: 2 / 3; 
@@ -199,26 +260,6 @@ html {
 	justify-self: center;
 	align-self: center;
 }
-
-.lastCard, .middleCard {
-	/*border: 2px solid black;*/
-	background: white;
-	box-shadow: 0px 0px 5px 3px #000000;
-}
-
-.lastCard {
-	z-index: 0;
-	grid-row: 3 / span 3;
-	grid-column: 1 / span 3;
-}
-
-.middleCard {
-	z-index: 1;
-	grid-row: 2 / span 3;
-	grid-column: 2 / span 3;
-}
-
-
 
 .topCard {
 	background-color: transparent;
@@ -246,18 +287,21 @@ html {
 	width: 100%;
 	height: 100%;
 	backface-visibility: hidden;
-	box-shadow: 2px -2px 3px 1px #000000;
-	border: 1px solid black;
+	box-shadow: 6px -6px 6px 8px #00000066; 
   }
   
+  .topCardFront > h1, .topCardBack > h1 {
+	  font-size: 32px;
+	  line-height: 2;
+  }
+
   .topCardFront {
-	background-color: white;
+	background-color: #e0e0e0;
 	color: black;
-	
   }
   
   .topCardBack {
-	background-color: white;
+	background-color: #e0e0e0;
 	color: black;
 	transform: rotateY(180deg);
   }

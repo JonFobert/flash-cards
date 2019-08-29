@@ -30,7 +30,7 @@ class TopCardBack extends React.Component {
         return (
             <div className="topCardBack">
                 <h1>Answer:</h1>
-                <pre>{this.props.card.answerText}</pre>
+                <p>{this.props.card.answerText}</p>
             </div>
         )
     }
@@ -64,8 +64,6 @@ class Cards extends React.Component {
 
         return (
             <div className = "cards">
-                <div className = "lastCard" />
-                <div className = "middleCard" />
                 <TopCard card = {currentCard} />
             </div>
         )

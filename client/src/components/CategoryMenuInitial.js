@@ -1,6 +1,6 @@
 import React from 'react'
 
-class CategoryMenu extends React.Component {
+class CategoryMenuInitial extends React.Component {
     constructor(props) {
         super(props)
     }
@@ -14,11 +14,14 @@ class CategoryMenu extends React.Component {
         this.props.handleCategoryChange(e)
     }
 
+    handleFormSubmit = (e) => {
+        this.props.handleInitialCategories(e)
+    }
 
     render() {
         
         return(
-            <div className = "categoryMenu">
+            <div className = "categoryMenuInitial">
                 <h2>Select Categories</h2>
                 <form>
                     <input type="checkbox" name="category" id="arrayMethods" checked={this.isCategoryChecked('arrayMethods')} value="arrayMethods" onChange = {this.handleFormChange}/>
@@ -32,10 +35,14 @@ class CategoryMenu extends React.Component {
                     <br/>
                     <input type="checkbox" name="category" id="es6" checked={this.isCategoryChecked('es6')} value="es6" onChange = {this.handleFormChange}/>
                     <label htmlFor="es6">ES6</label>
+                    <br />
                 </form>
+                <div className="buttonHolder">
+                    <button id="initialSubmit" onClick = {this.handleFormSubmit}>Start!</button>
+                </div>
             </div>
         )
     }
 }
 
-export default CategoryMenu
+export default CategoryMenuInitial

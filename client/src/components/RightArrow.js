@@ -12,7 +12,7 @@ class RightArrow extends React.Component {
   render() {
     return (
       <div className = "rightArrow" onClick={this.handleClick}>
-        <p>Next</p>
+        <p>&rarr;</p>
       </div>
     );
   };

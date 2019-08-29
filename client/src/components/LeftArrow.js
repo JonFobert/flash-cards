@@ -12,7 +12,7 @@ class LeftArrow extends React.Component {
     render() {
       return (
           <div className = 'leftArrow' onClick={this.handleClick}>
-              <p>Back</p>
+              <p className = 'arrow'>&larr;</p>
           </div>
       )
     }

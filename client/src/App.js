@@ -4,7 +4,7 @@
 
 import React from 'react';
 import './App.css';
-import cardsFromJSON from './cards.json'
+import CategoryMenuInitial from './components/CategoryMenuInitial.js'
 import TopBar from './components/TopBar.js'
 import NewCardMenu from './components/NewCardMenu.js'
 import CategoryMenu from './components/CategoryMenu.js'
@@ -17,6 +17,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       doneLoading: false,
+      initialCategoriesSelected: false,
       index: 0,
       cards: [],
       categories: ['arrayMethods', 'stringMethods', 'react', 'es6'],
@@ -28,6 +29,11 @@ class App extends React.Component {
   componentDidMount() {
     this.fetchGetBasedOnCategories()
   }  
+
+  handleInitialCategories = (e) => {
+    console.log('handling initial Cats')
+    this.setState({initialCategoriesSelected: true})
+  }
 
   fetchGetBasedOnCategories = () => {
     let categoriesQuery= '';
@@ -109,9 +115,21 @@ class App extends React.Component {
     return cardsDisplayed
   }
 
+
+  /*****************
+   * Render Method *
+   *****************/
+
   render() {
     if(!this.state.doneLoading) {
       return (<p>loading...</p>)
+    } else if(!this.state.initialCategoriesSelected) {
+      return (
+      <div className = "page">
+        <div className = "backgroundImage" />
+        <CategoryMenuInitial categories = {this.state.categories} handleCategoryChange = {this.handleCategoryChange} handleInitialCategories= {this.handleInitialCategories} />
+      </div>
+      )
     } else {
       console.log(this.calculateDisplayedCards())
       let CategoryMenuCreate;
@@ -126,6 +144,7 @@ class App extends React.Component {
 
       return (
         <div className = "page">
+          <div className = "backgroundImage blur"/>
           <TopBar handleNewCardMenuClick = {this.handleNewCardMenuClick} handleCategoryMenuClick = {this.handleCategoryMenuClick}/>
           {CategoryMenuCreate}
           {newCardMenu}
