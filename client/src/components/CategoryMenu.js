@@ -25,17 +25,17 @@ class CategoryMenu extends React.Component {
                 <div className = "close" onClick={this.handleClose}>X</div>
                 <h2>Select Categories</h2>
                 <form>
-                    <input type="checkbox" name="category" id="arrayMethods" checked={this.isCategoryChecked('arrayMethods')} value="arrayMethods" onChange = {this.handleFormChange}/>
-                    <label htmlFor="arrayMethods">Array Methods</label>
+                    <input type="checkbox" name="category" id="tv" checked={this.isCategoryChecked('tv')} value="tv" onChange = {this.handleFormChange}/>
+                    <label htmlFor="tv">TV</label>
                     <br/>
-                    <input type="checkbox" name="category" id="stringMethods" checked={this.isCategoryChecked('stringMethods')} value="stringMethods" onChange = {this.handleFormChange}/>
-                    <label htmlFor="stringMethods">String Methods</label>
+                    <input type="checkbox" name="category" id="movies" checked={this.isCategoryChecked('movies')} value="movies" onChange = {this.handleFormChange}/>
+                    <label htmlFor="movies">Movies</label>
                     <br/>
-                    <input type="checkbox" name="category" id="react" checked={this.isCategoryChecked('react')} value="react" onChange = {this.handleFormChange}/>
-                    <label htmlFor="react">React</label>
+                    <input type="checkbox" name="category" id="bodiesOfWater" checked={this.isCategoryChecked('bodiesOfWater')} value="bodiesOfWater" onChange = {this.handleFormChange}/>
+                    <label htmlFor="bodiesOfWater">Bodies of Water</label>
                     <br/>
-                    <input type="checkbox" name="category" id="es6" checked={this.isCategoryChecked('es6')} value="es6" onChange = {this.handleFormChange}/>
-                    <label htmlFor="es6">ES6</label>
+                    <input type="checkbox" name="category" id="stateCapitals" checked={this.isCategoryChecked('stateCapitals')} value="stateCapitals" onChange = {this.handleFormChange}/>
+                    <label htmlFor="stateCapitals">State Capitals</label>
                 </form>
             </div>
         )

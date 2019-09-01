@@ -36,10 +36,10 @@ class AddCardMenu extends React.Component {
                 <form onSubmit={this.handleFormSubmit}>
                     <select id='category' required onChange={this.handleCategoryChange}>
                         <option value="">Select a Category</option>
-                        <option value="arrayMethods">Array Methods</option>
-                        <option value="stringMethods">String Methods</option>
-                        <option value="react">React</option>
-                        <option value="es6">ES6</option>
+                        <option value="tv">TV</option>
+                        <option value="movies">Movies</option>
+                        <option value="bodiesOfWater">Bodies of Water</option>
+                        <option value="stateCapitals">State Capitals</option>
                     </select>
                     <br />
                     <label htmlFor="questionText" >Enter Question Text:</label>

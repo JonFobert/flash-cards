@@ -23,7 +23,7 @@ class App extends React.Component {
       initialCategoriesSelected: false,
       index: 0,
       cards: [],
-      categories: ['arrayMethods', 'stringMethods', 'react', 'es6'],
+      categories: ['tv', 'movies', 'stateCapitals', 'bodiesOfWater'],
       categoryMenuOpen: false,
       addCardMenuOpen: false,
       evenCardFlipped: false,
