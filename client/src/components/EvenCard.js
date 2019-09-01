@@ -4,7 +4,7 @@
 
 import React from 'react';
 
-class TopCardFront extends React.Component {
+class CardFront extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -17,16 +17,16 @@ class TopCardFront extends React.Component {
     //flip animation: https://www.w3schools.com/howto/howto_css_flip_card.asp
     render() {
         return (
-            <div className="topCardFront">
-                <h1>Question:</h1>
+            <div className="cardFront">
+                <h1>Question</h1>
                 <p>{this.props.card.questionText}</p>
-                <button id="flipCard" onClick = {this.handleCardFlip}>Flip Over</button>
+                <button className="flipCardFrontButton" onClick = {this.handleCardFlip}>Flip Over</button>
             </div>
         )
     }
 }
 
-class TopCardBack extends React.Component {
+class CardBack extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -38,32 +38,32 @@ class TopCardBack extends React.Component {
     //flip animation: https://www.w3schools.com/howto/howto_css_flip_card.asp
     render() {
         return (
-            <div className="topCardBack">
-                <h1>Answer:</h1>
+            <div className="cardBack">
+                <h1>Answer</h1>
                 <p>{this.props.card.answerText}</p>
-                <button id="flipCardBack" onClick = {this.handleCardFlip}>Flip Over</button>
+                <button className="flipCardBackButton" onClick = {this.handleCardFlip}>Flip Over</button>
             </div>
         )
     }
 }
 
-class TopCard extends React.Component {
+class Card extends React.Component {
     constructor(props) {
         super(props);
     }
 
     //flip animation adapted from: https://www.w3schools.com/howto/howto_css_flip_card.asp
     render() {
-        let flippedClass = 'topCard'
+        let flippedClass = 'card'
         if(this.props.cardFlipped) {
-            flippedClass = 'topCard flipped'
+            flippedClass = 'card flipped'
         }
         //push the card over.
         return (
             <div className = {flippedClass}>
-                <div className = 'topCardInner quickFlip'>
-                    <TopCardFront card = {this.props.card} handleCardFlip = {this.props.handleCardFlip}/>
-                    <TopCardBack card = {this.props.card} handleCardFlip = {this.props.handleCardFlip}/>
+                <div className = 'cardInner quickFlip'>
+                    <CardFront card = {this.props.card} handleCardFlip = {this.props.handleCardFlip}/>
+                    <CardBack card = {this.props.card} handleCardFlip = {this.props.handleCardFlip}/>
                 </div>
             </div> 
         )
@@ -79,8 +79,8 @@ class EvenCard extends React.Component {
         let currentCard = this.props.cards[this.props.index]
 
         return (
-            <div className = "cards">
-                <TopCard card = {currentCard} handleCardFlip = {this.props.handleCardFlip} cardFlipped = {this.props.cardFlipped}/>
+            <div className = "cardHolder">
+                <Card card = {currentCard} handleCardFlip = {this.props.handleCardFlip} cardFlipped = {this.props.cardFlipped}/>
             </div>
         )
     }

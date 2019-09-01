@@ -1,6 +1,6 @@
 import React from 'react'
 
-class NewCardMenu extends React.Component {
+class AddCardMenu extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -24,10 +24,15 @@ class NewCardMenu extends React.Component {
         this.props.handleNewCard(e, this.state)
     }
 
+    handleClose = (e) => {
+        this.props.handleCloseAddCardMenu()
+    }
+
     render() {
         return (
             <div className="newCardMenu">
-                <h2>New Card</h2>
+                <div className = "close" onClick = {this.handleClose}>X</div>
+                <h2>Add Card</h2>
                 <form onSubmit={this.handleFormSubmit}>
                     <select id='category' required onChange={this.handleCategoryChange}>
                         <option value="">Select a Category</option>
@@ -54,4 +59,4 @@ class NewCardMenu extends React.Component {
     }
 }
 
-export default NewCardMenu
+export default AddCardMenu

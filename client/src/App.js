@@ -1,17 +1,19 @@
 //TO DO: Start with Joana Yellow and select categories Window. Then blur when a category is selected
 //Consider CSS blur() and transition
 //transition slide from left to right && right to left?
+//  - two cards - current card and next card (or last card). transition exit and enter between them
 
 import React from 'react';
 import './App.css';
 import CategoryMenuInitial from './components/CategoryMenuInitial.js'
 import TopBar from './components/TopBar.js'
-import NewCardMenu from './components/NewCardMenu.js'
+import AddCardMenu from './components/AddCardMenu.js'
 import CategoryMenu from './components/CategoryMenu.js'
-import Cards from './components/Cards.js'
+import EvenCard from './components/EvenCard.js'
+import OddCard from './components/OddCard.js'
 import LeftArrow from './components/LeftArrow.js'
 import RightArrow from './components/RightArrow.js'
-import { CSSTransition } from "react-transition-group";
+import { CSSTransition } from "react-transition-group"
 
 class App extends React.Component {
   constructor(props) {
@@ -23,8 +25,11 @@ class App extends React.Component {
       cards: [],
       categories: ['arrayMethods', 'stringMethods', 'react', 'es6'],
       categoryMenuOpen: false,
-      newCardMenuOpen: false,
-      cardFlipped: false
+      addCardMenuOpen: false,
+      evenCardFlipped: false,
+      oddCardFlipped: false,
+      nextCardRequested: false,
+      previousCardRequested: false
     }
   }
 
@@ -51,8 +56,16 @@ class App extends React.Component {
     this.setState({categoryMenuOpen: !this.state.categoryMenuOpen})
   }
 
-  handleNewCardMenuClick = () => {
-    this.setState({newCardMenuOpen: !this.state.newCardMenuOpen})
+  handleAddCardMenuClick = () => {
+    this.setState({addCardMenuOpen: !this.state.addCardMenuOpen})
+  }
+
+  handleCloseCategoryMenu = () => {
+    this.setState({categoryMenuOpen: false})
+  }
+
+  handleCloseAddCardMenu = () => {
+    this.setState({addCardMenuOpen: false})
   }
 
   handleCategoryChange = (e) => {
@@ -84,25 +97,40 @@ class App extends React.Component {
       body: JSON.stringify({categories: this.state.categories, newCategory: formState.newCategory, questionText: formState.questionText, answerText: formState.answerText})
     })
     this.fetchGetBasedOnCategories()
+    this.setState({addCardMenuOpen: false})
+  }
+
+  flipCardsIfFlipped = () => {
+    if(this.state.evenCardFlipped) {
+      this.setState({evenCardFlipped: false, })
+    }
+    if(this.state.oddCardFlipped) {
+      this.setState({oddCardFlipped: false})
+    }
   }
 
   handleRightClick = () => {
-    if(this.state.index < this.state.cards.length-1)
-    this.setState({index: this.state.index + 1, cardFlipped: false})
+    if(this.state.index < this.state.cards.length-1) {
+      this.flipCardsIfFlipped()
+      this.setState({index: this.state.index + 1, nextCardRequested: true})
+    }
   }
   
   handleLeftClick = () => {
     if(this.state.index > 0) {
-      this.setState({index: this.state.index - 1})
+      this.flipCardsIfFlipped()
+      this.setState({index: this.state.index - 1, previousCardRequested: true})
     }
   }
 
   /*******handle flipping cards******** */
-  handleCardFlip = () => {
-    this.setState({cardFlipped: !this.state.cardFlipped})
+  handleEvenCardFlip = () => {
+    this.setState({evenCardFlipped: !this.state.evenCardFlipped})
   }
 
-
+  handleOddCardFlip = () => {
+    this.setState({oddCardFlipped: !this.state.oddCardFlipped})
+  }
 
   calculateDisplayedCards = () => {
     let cardsDisplayed = [];
@@ -116,6 +144,12 @@ class App extends React.Component {
     return cardsDisplayed
   }
 
+  displayCards = (index, buttonSelected) => {
+    if (buttonSelected === 'next') {
+
+    }
+
+  }
 
   /*****************
    * Render Method *
@@ -133,29 +167,126 @@ class App extends React.Component {
       )
     } else {
       console.log(this.calculateDisplayedCards())
-      let CategoryMenuCreate;
+      let categoryMenu;
       if(this.state.categoryMenuOpen) {
-        CategoryMenuCreate = <CategoryMenu categories = {this.state.categories} handleCategoryChange = {this.handleCategoryChange}/>;
+        categoryMenu = <CategoryMenu categories = {this.state.categories} handleCategoryChange = {this.handleCategoryChange} handleCloseCategoryMenu = {this.handleCloseCategoryMenu}/>;
       }
 
-      let newCardMenu;
-      if(this.state.newCardMenuOpen) {
-        newCardMenu = <NewCardMenu handleNewCard = {this.handleNewCard} />
-      }  
+      let addCardMenu;
+      if(this.state.addCardMenuOpen) {
+        addCardMenu = <AddCardMenu handleCloseAddCardMenu = {this.handleCloseAddCardMenu} handleNewCard = {this.handleNewCard} />
+      }
+
+      let evenCard
+      let oddCard;
+      if(this.state.nextCardRequested || (!this.state.nextCardRequested && !this.state.previousCardRequested)) {
+        //set indexes for the transision when the next card is requested
+        let evenIndex = this.state.index
+        let oddIndex = this.state.index
+        if(this.state.index % 2) {
+          evenIndex = this.state.index - 1
+        } else {
+          oddIndex = this.state.index - 1
+        }
+        //create and animate the current and next card
+        evenCard = <CSSTransition
+          in={this.state.index % 2 === 0}
+          //appear = {true}
+          timeout = {{
+            enter: 400,
+            exit: 400
+          }}
+          onEntered = {() => this.setState({nextCardRequested: false})}
+          classNames ="evenCardNext"> 
+          <EvenCard 
+            cards = {this.calculateDisplayedCards()}
+            index = {evenIndex}
+            cardFlipped = {this.state.evenCardFlipped}
+            handleCardFlip = {this.handleEvenCardFlip}
+          />
+        </CSSTransition>
+        if(this.state.index > 0) {
+          oddCard = <CSSTransition
+            in={this.state.index % 2 === 1}
+            appear = {true}
+            timeout = {{
+              enter: 400,
+              exit: 400
+            }}
+            onEntered = {() => this.setState({nextCardRequested: false})}
+            classNames ="oddCardNext"> 
+          <OddCard 
+            cards = {this.calculateDisplayedCards()}
+            index = {oddIndex}
+            cardFlipped = {this.state.oddCardFlipped}
+            handleCardFlip = {this.handleOddCardFlip}
+          />
+          </CSSTransition>
+        }
+
+
+      } else if(this.state.previousCardRequested) {
+        //define indexes for when the previous card is requested
+        let evenIndex = this.state.index
+        let oddIndex = this.state.index
+        if(this.state.index % 2) {
+          evenIndex = this.state.index + 1
+        } else {
+          oddIndex = this.state.index + 1
+        }
+        evenCard = <CSSTransition
+          in={this.state.index % 2 === 0}
+          //appear = {true}
+          timeout = {{
+            enter: 400,
+            exit: 400
+          }}
+          onEntered = {() => this.setState({previousCardRequested: false})}
+          classNames ="evenCardPrevious"> 
+          <EvenCard 
+            cards = {this.calculateDisplayedCards()}
+            index = {evenIndex}
+            cardFlipped = {this.state.evenCardFlipped}
+            handleCardFlip = {this.handleEvenCardFlip}
+            
+          />
+        </CSSTransition>
+
+          oddCard = <CSSTransition
+            in={this.state.index % 2 === 1}
+            appear = {true}
+            timeout = {{
+              enter: 400,
+              exit: 400
+            }}
+            onEntered = {() => this.setState({previousCardRequested: false})}
+            classNames ="oddCardPrevious"> 
+          <OddCard 
+            cards = {this.calculateDisplayedCards()}
+            index = {oddIndex}
+            cardFlipped = {this.state.oddCardFlipped}
+            handleCardFlip = {this.handleOddCardFlip}
+          />
+          </CSSTransition>
+        }
+      
+    
 
       return (
         <div className = "page">
           <div className = "backgroundImage blur"/>
-          <TopBar handleNewCardMenuClick = {this.handleNewCardMenuClick} handleCategoryMenuClick = {this.handleCategoryMenuClick}/>
-          {CategoryMenuCreate}
-          {newCardMenu}
+          <TopBar handleAddCardMenuClick = {this.handleAddCardMenuClick} handleCategoryMenuClick = {this.handleCategoryMenuClick}/>
+          {categoryMenu}
+          {addCardMenu}
           <LeftArrow handleClick = {this.handleLeftClick}/>
           <RightArrow handleClick = {this.handleRightClick}/>
-          <Cards cards = {this.calculateDisplayedCards()} index = {this.state.index} cardFlipped = {this.state.cardFlipped} handleCardFlip = {this.handleCardFlip}/>
+          {evenCard}
+          {oddCard}
         </div>
       )
     }
   }
 }
+
 
 export default App;

@@ -14,11 +14,15 @@ class CategoryMenu extends React.Component {
         this.props.handleCategoryChange(e)
     }
 
+    handleClose = () => {
+        this.props.handleCloseCategoryMenu();
+    }
 
     render() {
         
         return(
             <div className = "categoryMenu">
+                <div className = "close" onClick={this.handleClose}>X</div>
                 <h2>Select Categories</h2>
                 <form>
                     <input type="checkbox" name="category" id="arrayMethods" checked={this.isCategoryChecked('arrayMethods')} value="arrayMethods" onChange = {this.handleFormChange}/>

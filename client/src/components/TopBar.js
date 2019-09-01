@@ -23,7 +23,6 @@ class SelectCategory extends React.Component {
     constructor(props) {
         super(props)
         this.state = {isSelectCategoryMenuOpen: false}
-        
         this.handleClick = this.handleClick.bind(this)
     }
 
@@ -59,7 +58,7 @@ class TopBar extends React.Component {
         <nav className="topBar">
             <GitHubLink/>
             <div className= "menuActions">
-                <NewCard handleClick = {this.props.handleNewCardMenuClick}/>
+                <NewCard handleClick = {this.props.handleAddCardMenuClick}/>
                 <SelectCategory handleClick = {this.props.handleCategoryMenuClick}/>
             </div>
         </nav>
