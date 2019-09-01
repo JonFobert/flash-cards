@@ -70,7 +70,7 @@ class TopCard extends React.Component {
     }
 }
 
-class Cards extends React.Component {
+class EvenCard extends React.Component {
     constructor(props) {
       super(props);
     }
@@ -86,4 +86,4 @@ class Cards extends React.Component {
     }
   }
   
-  export default Cards;
+  export default EvenCard;

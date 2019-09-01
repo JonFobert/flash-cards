@@ -6,7 +6,6 @@ class CategoryMenuInitial extends React.Component {
     }
 
     isCategoryChecked = (category) => {
-        console.log(this.props.categories.includes(category))
         return this.props.categories.includes(category)
     }
 
