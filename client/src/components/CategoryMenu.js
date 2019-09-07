@@ -33,6 +33,9 @@ class CategoryMenu extends React.Component {
                     <input type="checkbox" name="category" id="stateCapitals" checked={this.isCategoryChecked('stateCapitals')} value="stateCapitals" onChange = {this.handleFormChange}/>
                     <label htmlFor="stateCapitals">State Capitals</label>
                 </form>
+                <div className = "buttonHolder">
+                    <button id="categoriesDoneButton" onClick = {this.handleClose}>Done</button>
+                </div>
             </div>
         )
     }

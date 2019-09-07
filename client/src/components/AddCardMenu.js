@@ -33,7 +33,7 @@ class AddCardMenu extends React.Component {
             <div className="newCardMenu">
                 <div className = "close" onClick = {this.handleClose}>X</div>
                 <h2>Add Card</h2>
-                <form onSubmit={this.handleFormSubmit}>
+                <form onSubmit={this.handleFormSubmit} >
                     <select id='category' required onChange={this.handleCategoryChange}>
                         <option value="">Select a Category</option>
                         <option value="tv">TV</option>
@@ -52,7 +52,7 @@ class AddCardMenu extends React.Component {
                     <textarea required id="answerText" name="answerText" rows="5" cols="33" onChange = {this.handleAnswerChange}>
                     </textarea>
                     <br />
-                    <input type="submit" value="Submit" />
+                    <input type="submit" id="newCardSubmit" value="Submit" />
                 </form>
             </div>
         )
