@@ -1,10 +1,6 @@
 import React from 'react'
 
 class RightArrow extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  
   handleClick = () => {
     this.props.handleClick()
   }

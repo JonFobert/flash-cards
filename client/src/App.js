@@ -136,7 +136,7 @@ class App extends React.Component {
     let cardsDisplayed = [];
       for(let i = 0; i < this.state.cards.length; i++) {
         for(let j = 0; j < this.state.categories.length; j++) {
-          if(this.state.cards[i].category == this.state.categories[j]) {
+          if(this.state.cards[i].category === this.state.categories[j]) {
             cardsDisplayed.push(this.state.cards[i])
           }
         }

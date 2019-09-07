@@ -1,10 +1,6 @@
 import React from 'react'
 
 class CategoryMenu extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-
     isCategoryChecked = (category) => {
         console.log(this.props.categories.includes(category))
         return this.props.categories.includes(category)

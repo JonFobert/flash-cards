@@ -5,10 +5,6 @@
 import React from 'react';
 
 class CardFront extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     handleCardFlip = () => {
         console.log('inital flip recoreded')
         this.props.handleCardFlip()
@@ -27,10 +23,6 @@ class CardFront extends React.Component {
 }
 
 class CardBack extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     handleCardFlip = () => {
         this.props.handleCardFlip()
     }
@@ -48,10 +40,6 @@ class CardBack extends React.Component {
 }
 
 class Card extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     //flip animation adapted from: https://www.w3schools.com/howto/howto_css_flip_card.asp
     render() {
         let flippedClass = 'card'
@@ -71,10 +59,6 @@ class Card extends React.Component {
 }
 
 class OddCard extends React.Component {
-    constructor(props) {
-      super(props);
-    }
-
     render() {
         let currentCard = this.props.cards[this.props.index]
 
