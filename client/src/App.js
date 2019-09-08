@@ -1,7 +1,3 @@
-//TO DO: Start with Joana Yellow and select categories Window. Then blur when a category is selected
-//Consider CSS blur() and transition
-//transition slide from left to right && right to left?
-//  - two cards - current card and next card (or last card). transition exit and enter between them
 
 import React from 'react';
 import './App.css';
