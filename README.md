@@ -1,6 +1,6 @@
 # Flash Cards
 
-##Overview:
+## Overview:
 Built using Mongodb/Mongoose, Express, React and Node
 
 Individaul cards, including category, are store in Mongodb
