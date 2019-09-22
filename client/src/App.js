@@ -162,7 +162,6 @@ class App extends React.Component {
       </div>
       )
     } else {
-      console.log(this.calculateDisplayedCards())
       let categoryMenu;
       if(this.state.categoryMenuOpen) {
         categoryMenu = <CategoryMenu categories = {this.state.categories} handleCategoryChange = {this.handleCategoryChange} handleCloseCategoryMenu = {this.handleCloseCategoryMenu}/>;
@@ -278,6 +277,10 @@ class App extends React.Component {
           <RightArrow handleClick = {this.handleRightClick}/>
           {evenCard}
           {oddCard}
+          <div className = "attribution">
+            Favicon from Andrian Valeanu<br />
+            Favicon used under: https://creativecommons.org/licenses/by/3.0/legalcode
+          </div>
         </div>
       )
     }
