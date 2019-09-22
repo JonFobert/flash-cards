@@ -2,7 +2,6 @@ import React from 'react';
 
 class CardFront extends React.Component {
     handleCardFlip = () => {
-        console.log('inital flip recoreded')
         this.props.handleCardFlip()
     }
 
