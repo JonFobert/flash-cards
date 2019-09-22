@@ -483,6 +483,8 @@ body, input, button, select, option, textarea {
 }
 
 .attribution {
+	text-align: center;
+	color: white;
 	position: absolute;
 	bottom: 20px;
 }
