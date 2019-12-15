@@ -99,12 +99,14 @@ body, input, button, select, option, textarea {
 	grid-column: 1 / 4;
 	z-index: -1;
 	transform: scale(1.03);
-	/*filter: brightness(0.5)*/
+	opacity: 0.9;
+	filter: brightness(0.4);
 }
 
+/*
 .blur {
 	filter: brightness(0.7)
-}
+}*/
 
 .page {
 	display: grid;
